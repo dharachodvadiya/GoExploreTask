@@ -1,5 +1,6 @@
 package com.indie.apps.goexploretask.ui.home
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.indie.apps.goexploretask.R
 import com.indie.apps.goexploretask.data.model.ApiResponse
+import com.indie.apps.goexploretask.data.model.LableWithEmoji
 import com.indie.apps.goexploretask.ui.theme.GoExploreTaskTheme
 import com.indie.apps.goexploretask.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -35,6 +37,10 @@ fun HomeScreen(
                 HomeScreenData(
                     apiResponse = it,
                     onNextClick = onNextClick,
+                    currentSound = viewModel.currentSound,
+                    currentPlace = viewModel.currentPlace,
+                    onPlacesChange = viewModel::setSelectedPlace,
+                    onSoundChange = viewModel::setSelectedSound,
                     modifier = modifier
                 )
             }
@@ -55,8 +61,12 @@ fun HomeScreen(
 @Composable
 fun HomeScreenData(
     apiResponse: ApiResponse,
+    currentSound: LableWithEmoji,
+    currentPlace: LableWithEmoji,
     onNextClick: () -> Unit,
-    modifier: Modifier = Modifier
+    onSoundChange: (LableWithEmoji)-> Unit,
+    onPlacesChange: (LableWithEmoji)-> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier
@@ -73,6 +83,9 @@ fun HomeScreenData(
                 .verticalScroll(rememberScrollState())
         ) {
             ItemGrid(
+                onItemClick = {
+                    onSoundChange(it) },
+                currentData = currentSound,
                 lable = R.string.sound,
                 dataList = apiResponse.Sound,
                 modifier = Modifier
@@ -80,6 +93,8 @@ fun HomeScreenData(
             )
             visualsSection()
             ItemGrid(
+                onItemClick = onPlacesChange,
+                currentData = currentPlace,
                 lable = R.string.places,
                 dataList = apiResponse.Places,
                 modifier = Modifier

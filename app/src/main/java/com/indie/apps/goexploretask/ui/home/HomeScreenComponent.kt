@@ -1,5 +1,6 @@
 package com.indie.apps.goexploretask.ui.home
 
+import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -31,6 +32,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -69,6 +73,8 @@ fun titleSection(
 fun ItemGrid(
     @StringRes lable: Int,
     dataList : List<LableWithEmoji>,
+    currentData: LableWithEmoji,
+    onItemClick: (LableWithEmoji) -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -89,7 +95,12 @@ fun ItemGrid(
             horizontalItemSpacing = dimensionResource(id = R.dimen.padding)
         ) {
             items(dataList){ item ->
+
+                val isSelected = item == currentData
                 iconWithlableItem(
+                    onClick = {
+                        onItemClick (item)},
+                    isSelected,
                     iconText = item.emoji,
                     lable = item.label
                 )
@@ -167,18 +178,22 @@ fun bottomSection(
 
 @Composable
 private fun iconWithlableItem(
+    onClick: ()-> Unit,
+    isSelected: Boolean = false,
     iconText: String,
     lable: String,
     modifier: Modifier = Modifier
 ) {
     Surface(
-        onClick = {},
+        onClick = onClick,
         shape = RoundedCornerShape(50),
         modifier = modifier
+            .semantics { role = Role.Button }
     ) {
+        val bgColor = if(isSelected) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.surfaceContainer
         Row(
             modifier = Modifier
-                .background(MaterialTheme.colorScheme.surfaceContainer)
+                .background(bgColor)
                 .padding(5.dp)
                 .padding(horizontal = 15.dp),
             horizontalArrangement = Arrangement.Center,
