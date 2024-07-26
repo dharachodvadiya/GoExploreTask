@@ -23,14 +23,15 @@ import com.indie.apps.goexploretask.ui.theme.GoExploreTaskTheme
 @Composable
 fun ErrorScreen(
     message: String = "",
-    onRetry : ()-> Unit,
+    onRetry: () -> Unit,
     modifier: Modifier = Modifier
 ) {
 
     Box(
         modifier = modifier
             .fillMaxSize(),
-        contentAlignment = Alignment.Center)
+        contentAlignment = Alignment.Center
+    )
     {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -47,7 +48,7 @@ fun ErrorScreen(
                 shape = RoundedCornerShape(10.dp),
                 modifier = Modifier
                     .size(width = 200.dp, height = 50.dp),
-            ){
+            ) {
                 Text(
                     text = stringResource(R.string.retry),
                     style = MaterialTheme.typography.titleMedium,

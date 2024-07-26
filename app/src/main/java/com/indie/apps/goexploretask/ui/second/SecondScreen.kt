@@ -7,24 +7,24 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import com.indie.apps.goexploretask.R
 
 @Composable
 fun SecondScreen(
-    sound:String?,
-    place:String?,
+    sound: String?,
+    place: String?,
     modifier: Modifier = Modifier
 ) {
     Box(
         modifier = modifier
             .fillMaxSize(),
-        contentAlignment = Alignment.Center)
+        contentAlignment = Alignment.Center
+    )
     {
         Text(
             text = "Sound = $sound, \n Place = $place ",
             style = MaterialTheme.typography.titleMedium,
-            textAlign = TextAlign.Center)
+            textAlign = TextAlign.Center
+        )
     }
 }

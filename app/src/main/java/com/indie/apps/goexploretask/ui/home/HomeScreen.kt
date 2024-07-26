@@ -20,14 +20,14 @@ import com.indie.apps.goexploretask.util.Resource
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
-    onNextClick: (String,String) -> Unit,
+    onNextClick: (String, String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    when(viewModel.uiState)
-    {
+    when (viewModel.uiState) {
         is Resource.Loading -> {
             LoadingScreen()
         }
+
         is Resource.Success -> {
             viewModel.uiState.data?.let {
                 HomeScreenData(
@@ -46,6 +46,7 @@ fun HomeScreen(
                 )
             }
         }
+
         is Resource.Error -> {
             viewModel.uiState.message?.let {
                 ErrorScreen(
@@ -65,8 +66,8 @@ fun HomeScreenData(
     currentSound: LableWithEmoji,
     currentPlace: LableWithEmoji,
     onNextClick: () -> Unit,
-    onSoundChange: (LableWithEmoji)-> Unit,
-    onPlacesChange: (LableWithEmoji)-> Unit,
+    onSoundChange: (LableWithEmoji) -> Unit,
+    onPlacesChange: (LableWithEmoji) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -85,7 +86,8 @@ fun HomeScreenData(
         ) {
             ItemGrid(
                 onItemClick = {
-                    onSoundChange(it) },
+                    onSoundChange(it)
+                },
                 currentData = currentSound,
                 lable = R.string.sound,
                 dataList = apiResponse.Sound,
@@ -119,7 +121,7 @@ fun HomeScreenData(
 private fun HomeScreenPreview() {
     GoExploreTaskTheme {
         HomeScreen(
-            onNextClick = {a,b ->}
+            onNextClick = { a, b -> }
         )
     }
 }
