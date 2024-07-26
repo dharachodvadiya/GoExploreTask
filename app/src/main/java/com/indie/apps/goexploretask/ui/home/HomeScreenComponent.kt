@@ -44,7 +44,7 @@ import com.indie.apps.goexploretask.data.model.Visuals
 import com.indie.apps.goexploretask.ui.theme.GoExploreTaskTheme
 
 @Composable
-fun titleSection(
+fun TitleSection(
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -98,7 +98,7 @@ fun ItemGrid(
             items(dataList) { item ->
 
                 val isSelected = item == currentData
-                iconWithlableItem(
+                IconWithlableItem(
                     onClick = {
                         onItemClick(item)
                     },
@@ -115,7 +115,7 @@ fun ItemGrid(
 
 
 @Composable
-fun visualsSection(
+fun VisualsSection(
     modifier: Modifier = Modifier,
     dataList: List<Visuals>
 ) {
@@ -155,7 +155,7 @@ fun visualsSection(
 }
 
 @Composable
-fun bottomSection(
+fun BottomSection(
     onNextClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -181,7 +181,7 @@ fun bottomSection(
 }
 
 @Composable
-private fun iconWithlableItem(
+private fun IconWithlableItem(
     onClick: () -> Unit,
     isSelected: Boolean = false,
     iconText: String,
@@ -217,8 +217,8 @@ private fun iconWithlableItem(
 
 @Preview(showBackground = true)
 @Composable
-private fun titleSectionPreview() {
+private fun TitleSectionPreview() {
     GoExploreTaskTheme {
-        titleSection()
+        TitleSection()
     }
 }

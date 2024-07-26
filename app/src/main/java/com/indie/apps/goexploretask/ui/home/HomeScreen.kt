@@ -74,7 +74,7 @@ fun HomeScreenData(
         modifier = modifier
             .fillMaxSize()
     ) {
-        titleSection(
+        TitleSection(
             modifier = Modifier
                 .padding(dimensionResource(id = R.dimen.padding))
                 .padding(horizontal = 5.dp)
@@ -94,7 +94,7 @@ fun HomeScreenData(
                 modifier = Modifier
                     .padding(vertical = dimensionResource(id = R.dimen.padding))
             )
-            visualsSection(
+            VisualsSection(
                 dataList = apiResponse.Visuals
             )
             ItemGrid(
@@ -107,7 +107,7 @@ fun HomeScreenData(
             )
         }
 
-        bottomSection(
+        BottomSection(
             onNextClick = onNextClick,
             modifier = Modifier
                 .padding(dimensionResource(id = R.dimen.padding))
