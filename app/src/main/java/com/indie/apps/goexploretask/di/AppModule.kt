@@ -1,4 +1,4 @@
-package com.indie.apps.goexploretask
+package com.indie.apps.goexploretask.di
 
 import com.indie.apps.goexploretask.data.ApiService
 import com.indie.apps.goexploretask.repository.ApiRepository
