@@ -15,7 +15,9 @@ import com.indie.apps.goexploretask.ui.Destination
 import com.indie.apps.goexploretask.ui.home.HomeScreen
 import com.indie.apps.goexploretask.ui.second.SecondScreen
 import com.indie.apps.goexploretask.ui.theme.GoExploreTaskTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

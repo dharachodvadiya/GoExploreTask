@@ -1,7 +1,7 @@
 package com.indie.apps.goexploretask.data.model
 
 data class ApiResponse(
- val Sound : List<Sound>,
+ val Sound : List<LableWithEmoji>,
  val Visuals : List<Visuals>,
- val Places : List<Places>
+ val Places : List<LableWithEmoji>
 )
