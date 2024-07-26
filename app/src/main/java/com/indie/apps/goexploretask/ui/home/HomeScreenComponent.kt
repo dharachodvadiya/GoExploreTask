@@ -1,6 +1,5 @@
 package com.indie.apps.goexploretask.ui.home
 
-import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -17,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.staggeredgrid.LazyHorizontalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
@@ -38,9 +38,12 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberImagePainter
 import com.indie.apps.goexploretask.R
 import com.indie.apps.goexploretask.data.model.LableWithEmoji
+import com.indie.apps.goexploretask.data.model.Visuals
 import com.indie.apps.goexploretask.ui.theme.GoExploreTaskTheme
+import kotlinx.collections.immutable.ImmutableList
 
 @Composable
 fun titleSection(
@@ -114,7 +117,8 @@ fun ItemGrid(
 
 @Composable
 fun visualsSection(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    dataList: List<Visuals>
 ) {
     Column(
         modifier = modifier
@@ -129,23 +133,20 @@ fun visualsSection(
             contentPadding = PaddingValues(dimensionResource(id = R.dimen.padding)),
             horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding))
         ) {
-            items(5) { item ->
-
+            items(dataList){item ->
                 Surface(
                     shape = RoundedCornerShape(20.dp),
                     modifier = Modifier
                         .size(width = 120.dp, height = 170.dp)
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.ic_launcher_background),
+                        painter = rememberImagePainter(data = item.photo),
                         contentDescription = "item",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier.fillMaxSize()
                     )
                 }
-
             }
-
         }
     }
 }
@@ -215,13 +216,5 @@ private fun iconWithlableItem(
 private fun titleSectionPreview() {
     GoExploreTaskTheme {
         titleSection()
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun visualsSectionPreview() {
-    GoExploreTaskTheme {
-        visualsSection()
     }
 }

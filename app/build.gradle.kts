@@ -69,6 +69,9 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    //Immutability
+    implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5")
+
     //dagger-hilt
     val hilt_version = "2.48"
     implementation("com.google.dagger:hilt-android:$hilt_version")
@@ -86,6 +89,5 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:$nav_version")
 
     // Glide
-    implementation("com.github.bumptech.glide:glide:4.11.0")
-    kapt("com.github.bumptech.glide:compiler:4.11.0")
+    implementation("io.coil-kt:coil-compose:1.3.2")
 }

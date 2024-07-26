@@ -1,8 +1,6 @@
 package com.indie.apps.goexploretask.ui.home
 
-import android.util.Log
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -18,13 +16,11 @@ import com.indie.apps.goexploretask.data.model.ApiResponse
 import com.indie.apps.goexploretask.data.model.LableWithEmoji
 import com.indie.apps.goexploretask.ui.theme.GoExploreTaskTheme
 import com.indie.apps.goexploretask.util.Resource
-import dagger.hilt.android.lifecycle.HiltViewModel
-import retrofit2.Response
 
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
-    onNextClick: () -> Unit,
+    onNextClick: (String,String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     when(viewModel.uiState)
@@ -36,7 +32,12 @@ fun HomeScreen(
             viewModel.uiState.data?.let {
                 HomeScreenData(
                     apiResponse = it,
-                    onNextClick = onNextClick,
+                    onNextClick = {
+                        onNextClick(
+                            viewModel.currentSound.label,
+                            viewModel.currentPlace.label
+                        )
+                    },
                     currentSound = viewModel.currentSound,
                     currentPlace = viewModel.currentPlace,
                     onPlacesChange = viewModel::setSelectedPlace,
@@ -91,7 +92,9 @@ fun HomeScreenData(
                 modifier = Modifier
                     .padding(vertical = dimensionResource(id = R.dimen.padding))
             )
-            visualsSection()
+            visualsSection(
+                dataList = apiResponse.Visuals
+            )
             ItemGrid(
                 onItemClick = onPlacesChange,
                 currentData = currentPlace,
@@ -116,7 +119,7 @@ fun HomeScreenData(
 private fun HomeScreenPreview() {
     GoExploreTaskTheme {
         HomeScreen(
-            onNextClick = {}
+            onNextClick = {a,b ->}
         )
     }
 }
